@@ -121,31 +121,33 @@ delete from student
 
 ## DQL相关操作
 
-1.单表查询指定列
+1.1.单表查询指定列
 
 ```mysql
 SELECT  字段名 1,  字段名 2,  字段名 3, ... FROM  表名;
 ```
 
-2.起别名查询
+1.2.起别名查询
 
 ```mysql
 SELECT  字段名 1 AS  别名,  字段名 2 AS  别名... FROM  表名;
 ```
 
-3.去重查询
+1.3.去重查询
 
 ```mysql
 SELECT DISTINCT  字段名 FROM  表名;
 ```
 
-4.排序
+1.4.排序
 
 ```mysql
 SELECT  字段名 FROM  表名 WHERE  字段= 值 ORDER BY  字段名 [ASC|DESC];
+-- 查询所有数据,在年龄降序排序的基础上，如果年龄相同再以数学成绩升序排序
+select * from student order by age desc, math asc;
 ```
 
-5.聚合函数纵向查询常见函数如下
+1.5.聚合函数纵向查询常见函数如下
 
 ```mysql
 -- 查询年龄大于 20 的总数
@@ -160,12 +162,83 @@ select max(math) 最高分 from student;
 select min(math) 最低分 from student;
 ```
 
-6.分组
+1.6.分组
 
 ```mysql
 -- 分组查询是指使用 GROUP BY  语句对查询信息进行分组，相同数据作为一组
 SELECT  字段 1, 字段 2... FROM  表名 GROUP BY  分组字段 [HAVING  条件]；
 ```
 
+1.7.分页查询
 
+```mysql
+-- 最后如果不够 5 条，有多少显示多少
+select * from student3 limit 10,5;
+```
+
+
+
+1.8  约束
+
+1.8.1 主键操作
+
+```mysql
+-- 创建表学生表 st5, 包含字段(id, name, age)将 id 做为主键
+create table test (
+id int primary key, -- id 为主键
+name varchar(20),
+age int
+)
+
+-- 添加主键
+alter table 表名 add primary key(字段);
+
+-- 删除  表的主键
+alter table 表名 drop primary key;
+
+-- 删除 st5 表的主键
+alter table 表名 drop primary key;
+
+```
+
+1.8.2 自增  --一般含有索引值才能自增
+
+```mysql
+--ALTER TABLE  表名 AUTO_INCREMENT= 起始值;
+alter table 表名 auto_increment = 2000;
+```
+
+1.8.2 唯一、非空、默认
+
+```mysql
+字段名  字段类型 UNIQUE
+字段名  字段类型 NOT NULL
+字段名  字段类型 DEFAULT 
+```
+
+1.9 外键（级联：在修改和删除主表的主键时，同时更新或删除副表的外键值，称为级联操作）相关操作
+
+```mysql
+-- 新建表时添加
+[CONSTRAINT] [ 外键约束名称] FOREIGN KEY( 外键字段名) REFERENCES  主表名( 主键字段名)
+-- 已有表时创建
+ALTER TABLE  从表 ADD [CONSTRAINT] [ 外键约束名称] FOREIGN KEY ( 外键字段名) REFERENCES  主表( 主
+键字段名);
+-- 删除外键
+ALTER TABLE  从表 drop foreign key 
+```
+
+
+
+## DCL相关操作
+
+```mysql
+-- 备份
+mysqldump -u  用户名 -p  密码  数据库 > path //格式
+mysqldump -uroot -ppt123 db-test > d:/test.sql
+
+-- 还原
+use db-test;
+source sql脚本路径;
+```
 
