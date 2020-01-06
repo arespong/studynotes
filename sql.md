@@ -242,3 +242,32 @@ use db-test;
 source sql脚本路径;
 ```
 
+## sql的执行顺序
+
+
+
+```mysql
+手写sql:
+select <select_list>
+from <table_name>
+<join_type> join <join_table> on <join_condition>
+where <where_condition>
+group by <group_by_list>
+having <having_condition>
+order by <order_by_condition>
+limit <limt_number>
+
+from <left table>
+on <on_condition>
+<join_type> join <join_table>
+where <where_condition>
+group by <group_by_list>
+<sum()avg()等聚合函数>
+having <having_condition>
+select <select_list>
+distinct
+order by <order_by_condition>
+limit <limit_number>
+
+```
+
