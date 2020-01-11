@@ -251,6 +251,26 @@ cluster countkeysinslot slot
 	cluster getkeysinslot slot count
 ```
 
+SpringBoot整合Redis
+
+1  添加依赖  
+
+```xml
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+
+
+```
+
+2.application.yml
+
+```yml
+
+```
+
 
 
 ## 性质
